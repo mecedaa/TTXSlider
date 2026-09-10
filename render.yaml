@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: unga-ttx-slider
+    runtime: node
+    plan: starter          # change to "free" if you delete the disk block below
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: FACILITATOR_CODE
+        sync: false        # set the value yourself in the Render dashboard
+      - key: DATA_DIR
+        value: /var/data
+    disk:
+      name: instrument-data
+      mountPath: /var/data
+      sizeGB: 1
